@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+</head>
+
+<body>
+    <h1>Register Page</h1>
+
+    <form action="/register" method="post">
+      <label for="regUsername">Username:</label>
+      <input type="text" id="regUsername" name="username" required>
+      
+      <label for="regPassword">Password:</label>
+      <input type="password" id="regPassword" name="password" required>
+  
+      <label for="regNickname">Nickname:</label>
+      <input type="text" id="regNickname" name="nickname">
+           
+      <button type="submit">Register</button>
+    </form>
+    <% if (errormsg) { %>
+      <a><%= errormsg%></a>
+    <% } %>
+</body>
+</html>

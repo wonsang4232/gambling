@@ -1,0 +1,35 @@
+<!-- views/profile.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Profile</title>
+</head>
+<body>
+  <h1>User Profile</h1>
+  <div>
+    <p><strong>ID:</strong> <%= user.id %></p>
+    <p><strong>Username:</strong> <%= user.username %></p>
+    <p><strong>Nickname:</strong> <%= user.nickname %></p>
+    <p><strong>VIP Number:</strong> <%= user.vip_number %></p>
+    <p><strong>Money:</strong> <%= user.money %></p>
+  </div>
+
+    <form action="/post-comment" method="post">
+      <input type="hidden" name="targetUserId" value="<%= user.id %>">
+      <textarea name="comment" rows="4" cols="50" placeholder="Leave a comment"></textarea>
+      <button type="submit">Post Comment</button>
+    </form>
+  
+  <!-- 모든 사용자에게 보이는 영역 -->
+  <h2>Comments</h2>
+  <ul>
+    <% comments.forEach(comment => { %>
+      <li><%= comment.comment %> - <%= comment.nickname %></li>
+    <% }); %>
+  </ul>
+</body>
+</html>

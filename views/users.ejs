@@ -1,0 +1,36 @@
+<!-- views/users.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User List</title>
+</head>
+<body>
+  <h1>User List</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Username</th>
+        <th>Nickname</th>
+        <th>VIP Number</th>
+        <th>Money</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% users.forEach(user => { %>
+        <tr>
+          <td><%= user.id %></td>
+          <td><a href="/users/<%= user.id %>"><%= user.username %></a></td>
+          <td><%= user.nickname %></td>
+          <td><%= user.vip_number %></td>
+          <td><%= user.money %></td>
+        </tr>
+      <% }); %>
+    </tbody>
+  </table>
+</body>
+</html>
