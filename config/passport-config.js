@@ -19,13 +19,13 @@ passport.use('local-login',
         console.log("Pool connection error");
         done(null, false, {});
       } else {
-        conn.query('SELECT * FROM users WHERE username=?', [username], (err, result) => {
+        conn.query('SELECT * FROM users WHERE username=?', [username], async (err, result) => {
           if (err) {
             req.flash('error', 'Server Error');
             console.log("Query Error");
             done(null, false, {});
           } else if (result[0]) {
-            if (bcrypt.compare(password, result[0].password)) {
+            if (await bcrypt.compare(password, result[0].password)) {
               done(null, result[0]);
             } else {
               req.flash('error', 'Invalid Password');
