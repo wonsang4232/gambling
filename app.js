@@ -51,6 +51,9 @@ io.on('connection', (socket)=>{
 
 app.use('/socket.io/socket.io.js', express.static('node_modules/socket.io/client-dist/socket.io.js'));
 
+// css
+app.use(express.static('public'));
+
 server.listen(3000, () => {
 	console.log("Server listening at port 3000");
 });

@@ -1,39 +1,71 @@
-<!-- views/index.ejs -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Home Page</title>
-  <link rel="stylesheet" href="https://unpkg.com/mvp.css">
+  <title>My Website</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+
+    header {
+      background-color: #333;
+      color: #fff;
+      padding: 10px;
+      text-align: center;
+    }
+
+    nav {
+      background-color: #444;
+      padding: 10px;
+      text-align: center;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 15px;
+    }
+
+    section {
+      padding: 20px;
+    }
+  </style>
 </head>
 <body>
+
   <header>
-    <h1>Welcome to the Home Page</h1>
-    <% if (isLoggedIn) { %>
-      <p>Welcome, <%= nickname%>.</p>
-    <% } else { %>
-      <p>Please log in to continue.</p>
-    <% } %>
-    
+    <header>
+      <h1>Welcome to the Home Page</h1>
+    </header>
   </header>
 
   <nav>
-    <ul>
-      <li><a href="/">Home</a></li>
-      <% if(isLoggedIn) { %>
-        <li><a href="/logout">Logout</a></li>
-      <% } else { %>
-        <li><a href="/login">Login</a></li>
-      <% } %>
-      <li><a href="/users">Members</a></li>
-      <!-- 다른 메뉴 항목들 추가 -->
-    </ul>
+    <a href="/">Home</a>
+    <% if(isLoggedIn) { %>
+      <a href="/logout">Logout</a>
+    <% } else { %>
+      <a href="/login">Login</a>
+    <% } %>
+    <a href="/users">Members</a>
+    <a href="/chat">Chat</a>
   </nav>
 
-  <footer>
-    <p>© 2023 Your Company</p>
-  </footer>
+  <section>
+    <% if (isLoggedIn) { %>
+      <h1>Welcome to the Gambling Website, <%= nickname%> user</h1>
+    <% } else { %>
+      <h1>Welcome to the Gambling Website, Please log in first.</h1>
+    <% } %></h1>
+    <h2>Rule Book</h2>
+    <p>1. First if you log in, Each user will be allocated 100,000 dollars.</p>
+    <p>2. Each user can bring other users' money through the game.</p>
+    <p>3. If you go into the members, it's ranked based on money, so try to win first place!!</p>
+  </section>
+
 </body>
 </html>

@@ -1,30 +1,52 @@
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://unpkg.com/mvp.css">
-  <title>Login Page</title>
-</head>
-
-<body>
-  <h1>Login Page</h1>
-  
-  <form action="/login" method="post">
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="username" required>
-    
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" required>
-    
-    <button type="submit">Login</button>
-  </form>
-
-  <a href="/register">
-    <button>Go to Register</button>
-  </a>
-  <br>
-  <% if (errormsg) { %>
-   <a><%= errormsg%></a>
-   <% } %>
-</body>
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="/css/login.css" />
+    <title>Login Page</title>
+  </head>
+  <body>
+    <a href="/"> Home</a>
+    <section class="login">
+      <h2>Login</h2>
+      <ul>
+        <form id="login" action="/login" method="post">
+          <li>
+            <input
+              required
+              id="username"
+              type="text"
+              placeholder="username"
+              name="username"
+            />
+          </li>
+          <li>
+            <input
+              required
+              id="password"
+              type="password"
+              placeholder="password"
+              name="password"
+            />
+          </li>
+          <li>
+            <input type="checkbox" id="chk_id" name="chk_id" /><label for="chk_id">Remember ID</label>
+          </li>
+          <li><input type="submit" value="login" /></li>
+        </form>
+        <% if (errormsg) { %>
+          <a><%= errormsg%></a>
+        <% } %>
+      </ul>
+      <div>
+        <ul>
+          <li><a href="/register">Sign up</a></li>
+          <li><a href="">Find username</a></li>
+          <li><a href="">Find password</a></li>
+        </ul>
+      </div>
+    </section>
+  </body>
 </html>

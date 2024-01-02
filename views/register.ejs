@@ -3,26 +3,51 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/login.css" />
   <title>Login Page</title>
 </head>
 
 <body>
-    <h1>Register Page</h1>
-
-    <form action="/register" method="post">
-      <label for="regUsername">Username:</label>
-      <input type="text" id="regUsername" name="username" required>
-      
-      <label for="regPassword">Password:</label>
-      <input type="password" id="regPassword" name="password" required>
-  
-      <label for="regNickname">Nickname:</label>
-      <input type="text" id="regNickname" name="nickname">
-           
-      <button type="submit">Register</button>
-    </form>
-    <% if (errormsg) { %>
-      <a><%= errormsg%></a>
+  <section class="login">
+    <h2>Register</h2>
+    <ul>
+    <form id="register" action="/register" method="post">
+      <li>
+       <input
+         required
+         id="nickname"
+         type="text"
+         placeholder="nickname"
+         name="nickname"
+       />
+     </li>
+     <li>
+       <input
+         required
+         id="reg_username"
+         type="text"
+         placeholder="username"
+         name="username"
+       />
+     </li>
+     <li>
+       <input
+         required
+         id="reg_password"
+         type="password"
+         placeholder="password"
+         name="password"
+       />
+     </li>
+     <% if (errormsg) { %>
+      <a><%= errormsg%></a><br>
     <% } %>
+    <br>
+     <li><input type="submit" value="register" /></li>
+   </form>
+ </ul>
+ <a href="/login">Login Page</a>
+</section>
+
 </body>
 </html>
