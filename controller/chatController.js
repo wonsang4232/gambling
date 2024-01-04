@@ -1,7 +1,16 @@
 const socketio = require('socket.io');
 
+exports.rendergenerateRoom = (req, res) => {
+
+}
+
 exports.renderChatpage = (req, res) => {
-  res.render('chat');
+  if (req.user) {
+    res.render('chat');
+  } else {
+    req.flash('error', 'You need to login first to chat with others.');
+    res.redirect('login');
+  }
 }
 
 exports.ChatSocket = (server) => {
@@ -12,6 +21,8 @@ exports.ChatSocket = (server) => {
     const req = socket.request;
     const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
     console.log('New Client Connected!', ip, socket.id);
+
+
 
     socket.on('chat message', (data) => {
       console.log(data);
