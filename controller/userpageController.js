@@ -20,6 +20,7 @@ exports.renderUserpage = (req, res) => {
 
 exports.renderUserprofile = (req, res) => {
   var id = req.params.id;
+  
   // console.log("Rendering : ", id);
   // This renders two times.. but I don't know why lol
   // Give up fuckin nodejs

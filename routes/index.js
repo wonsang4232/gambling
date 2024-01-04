@@ -8,16 +8,7 @@ router.get('/', (req, res) => {
     } else {
         res.locals.isLoggedIn = false;
     }
-    res.render('index.ejs');
+    res.render('index');
 });
-
-router.get('/chat', (req, res) => {
-    try{
-        res.locals.uid = req.user.id;
-    } catch {
-        res.locals.uid = "";
-    }
-    res.render('chat');
-})
 
 module.exports = router;
