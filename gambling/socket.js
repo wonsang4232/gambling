@@ -1,15 +1,21 @@
-const http = require('http');
-const io = require('socket.io')(http);
+const socketio = require('socket.io');
 
-io.on('connection', (socket)=>{
-  console.log("User Connected !!")
-  socket.on('request_message', (msg) => {
-      io.emit('response_message', msg);
+module.exports = (server) => {
+  const io = socketio(server);
+  const chatsocket = io.of('/chat');
+
+  chatsocket.on('connection', (socket) => {
+    const req = socket.request;
+    const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    console.log('New Client Connected!', ip, socket.id);
+
+    socket.on('chat message', (data) => {
+      console.log(data);
+      chatsocket.emit('chat message', data.msg);
+    });
+
+    socket.on('disconnect', async () => {
+        console.log('user disconnected');
+    });
   });
-
-  socket.on('disconnect', async () => {
-      console.log('user disconnected');
-  });
-});
-
-module.exports = io;
+};

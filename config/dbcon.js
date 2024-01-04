@@ -1,4 +1,4 @@
-const mysql = require('mysql');
+const mysql = require('mysql2');
 
 // MySQL create pool
 const pool = mysql.createPool({
@@ -11,8 +11,11 @@ const pool = mysql.createPool({
   connectionLimit: 5,
 });
 
-pool.getConnection((err, conn) => {
+// const conn = await pool.getConnection();
+
+pool.getConnection( async (err, conn) => {
   if (err) {
+    console.log(err);
     throw err;
   } else {
     conn.query(`CREATE TABLE IF NOT EXISTS users (
@@ -23,10 +26,9 @@ pool.getConnection((err, conn) => {
       vip_number INT CHECK(vip_number >= 0 AND vip_number <= 2),
       created_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
       money INT CHECK(money >= 0)
-    );
-    `, (err, res) => {
-      console.log("users DATABASE CREATED.", res);
-    });
+    );`, () => {
+      console.log("users DATABASE CREATED");
+    })
 
     conn.query(`CREATE TABLE IF NOT EXISTS comments (  
       comment_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -36,8 +38,8 @@ pool.getConnection((err, conn) => {
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
       FOREIGN KEY (from_user_id) REFERENCES users(id),
       FOREIGN KEY (to_user_id) REFERENCES users(id)
-      );`, (err, res) => {
-        console.log("comments DATABASE CREATED.", res);
+      );`, () => {
+        console.log("comments DATABASE CREATED.");
       })
   }
   conn.release();

@@ -7,29 +7,100 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>User Profile</title>
+      <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .profile-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .profile-info img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+        
+        .profile-info p {
+            margin: 0;
+        }
+        
+        .user-details {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .user-details p {
+            margin: 0;
+        }
+        
+        .comments {
+            margin-bottom: 20px;
+        }
+        
+        .comment {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+        
+        .comment p {
+            margin: 0;
+        }
+    </style>
 </head>
 <body>
   <h1>User Profile</h1>
-  <div>
-    <p><strong>ID:</strong> <%= user.id %></p>
-    <p><strong>Username:</strong> <%= user.username %></p>
-    <p><strong>Nickname:</strong> <%= user.nickname %></p>
-    <p><strong>VIP Number:</strong> <%= user.vip_number %></p>
-    <p><strong>Money:</strong> <%= user.money %></p>
-  </div>
-
-    <form action="/post-comment" method="post">
-      <input type="hidden" name="targetUserId" value="<%= user.id %>">
-      <textarea name="comment" rows="4" cols="50" placeholder="Leave a comment"></textarea>
-      <button type="submit">Post Comment</button>
-    </form>
-  
-  <!-- 모든 사용자에게 보이는 영역 -->
-  <h2>Comments</h2>
-  <ul>
-    <% comments.forEach(comment => { %>
-      <li><%= comment.comment %> - <%= comment.nickname %></li>
-    <% }); %>
-  </ul>
+  <div class="container">
+    <!-- <h1>User Profile</h1> -->
+    <div class="profile-info">
+        <img src="#" alt="Profile Picture">
+        <p>Nickname: <strong><%= user.nickname%></strong></p>
+        <p>Username: <strong><%= user.username%></strong></p>
+        <p>User Level: <strong><%= user.vip_number%></strong></p>
+        <p>Money: <strong><%= user.money%></strong></p>
+    </div>
+    <div class="comments">
+      <form action="/post-comment" method="post">
+        <input type="hidden" name="targetUserId" value="<%= user.id %>">
+        <textarea name="comment" rows="4" cols="50" placeholder="Leave a comment"></textarea>
+        <button type="submit">Post Comment</button>
+      </form>
+      <h2>Comments</h2>
+      <ul>
+        <% comments.forEach(comment => { %>
+          <li>
+            <div class="comment">
+              <p><strong><%= comment.nickname %></strong></p>
+              <p><%= comment.comment %></p>
+            </div>
+          </li>
+        <% }); %>
+      </ul>
+    </div>
+</div>
 </body>
 </html>

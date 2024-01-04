@@ -35,20 +35,8 @@ app.use(require('./routes/users'));
 app.use(require('./routes/comment'));
 
 // socket
-const io = require('socket.io')(server);
-
-io.on('connection', (socket)=>{
-  console.log("User Connected !!", socket.id);
-  socket.on('chat message', (msg) => {
-		console.log(msg);
-    io.emit('chat message', msg);
-  });
-
-  socket.on('disconnect', async () => {
-      console.log('user disconnected');
-  });
-});
-
+const initializeSocket = require('./gambling/socket');
+initializeSocket(server);
 app.use('/socket.io/socket.io.js', express.static('node_modules/socket.io/client-dist/socket.io.js'));
 
 // css
@@ -57,3 +45,5 @@ app.use(express.static('public'));
 server.listen(3000, () => {
 	console.log("Server listening at port 3000");
 });
+
+module.exports = server;

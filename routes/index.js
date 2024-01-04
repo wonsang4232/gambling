@@ -12,6 +12,11 @@ router.get('/', (req, res) => {
 });
 
 router.get('/chat', (req, res) => {
+    try{
+        res.locals.uid = req.user.id;
+    } catch {
+        res.locals.uid = "";
+    }
     res.render('chat');
 })
 

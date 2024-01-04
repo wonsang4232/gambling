@@ -69,7 +69,7 @@
 
     <script src="/socket.io/socket.io.js"></script>
     <script>
-        var socket = io();
+        var socket = io("/chat");
 
         var messages = document.getElementById('messages');
         var form = document.getElementById('form');
@@ -78,7 +78,11 @@
         form.addEventListener('submit', function (e) {
             e.preventDefault();
             if (input.value) {
-                socket.emit('chat message', input.value);
+                data = {
+                    msg : input.value,
+                    uid : '<%= uid %>',
+                }
+                socket.emit('chat message', data);
                 input.value = '';
             }
         });
