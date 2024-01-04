@@ -14,7 +14,8 @@
   <table>
     <thead>
       <tr>
-        <th>ID</th>
+        <th>Ranking</th>
+        <!-- <th>ID</th> -->
         <th>Username</th>
         <th>Nickname</th>
         <th>User level</th>
@@ -22,9 +23,10 @@
       </tr>
     </thead>
     <tbody>
-      <% users.forEach(user => { %>
+      <% users.forEach((user, index) => { %>
         <tr>
-          <td><%= user.id %></td>
+          <td style="<%= getRankColor(index + 1) %>"><strong><%= index + 1 %></strong></td>
+          <!-- <td><%= user.id %></td> -->
           <td><a href="/users/<%= user.id %>"><%= user.username %></a></td>
           <td><%= user.nickname %></td>
           <td><% if (user.vip_number === 2) { %>
@@ -40,4 +42,17 @@
     </tbody>
   </table>
 </body>
+<% function getRankColor(rank) {
+  switch(rank) {
+    case 1:
+      return 'color: gold;';
+    case 2:
+      return 'color: silver;';
+    case 3:
+      return 'color: brown;';
+    default:
+      return ''; // 기본 색상
+  }
+}
+%>
 </html>

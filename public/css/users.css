@@ -4,7 +4,7 @@ body {
 }
 
 table {
-  border: 1px #8c8175 solid;
+  border: 1px #333 solid;
   font-size: .9em;
   box-shadow: 0 2px 5px rgba(0,0,0,.25);
   width: 100%;
@@ -20,12 +20,13 @@ th {
 thead {
   font-weight: bold;
   color: #fff;
-  background: #73685d;
+  background: #333;
 }
   
  td, th {
   padding: 1em .5em;
   vertical-align: middle;
+  text-align: center;
 }
   
  td {
