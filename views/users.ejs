@@ -14,8 +14,7 @@
   <table>
     <thead>
       <tr>
-        <th>Ranking</th>
-        <!-- <th>ID</th> -->
+        <th>Rank</th>
         <th>Username</th>
         <th>Nickname</th>
         <th>User level</th>
@@ -26,7 +25,6 @@
       <% users.forEach((user, index) => { %>
         <tr>
           <td style="<%= getRankColor(index + 1) %>"><strong><%= index + 1 %></strong></td>
-          <!-- <td><%= user.id %></td> -->
           <td><a href="/users/<%= user.id %>"><%= user.username %></a></td>
           <td><%= user.nickname %></td>
           <td><% if (user.vip_number === 2) { %>
