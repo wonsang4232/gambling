@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat servies</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io("/chat");
+    </script>
+    <script src="/js/RoomController.js"></script>
+</head>
+
+<body>
+    <a href="/">Home</a>
+    <button onclick="createRoom('player1')">Create Room</button>
+    <div>
+        <label for="roomCodeInput">Enter Room Code:</label>
+        <input type="text" id="roomCodeInput" maxlength="6" placeholder="123456">
+        <button onclick="joinroom()">Join Room</button>
+    </div>
+    <script>
+        function joinroom() {
+            const Inputroomcode = document.getElementById("roomCodeInput").value;
+            joinRoom(Inputroomcode);
+        }
+    </script>
+</body>
+</html>
