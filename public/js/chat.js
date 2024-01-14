@@ -1,21 +1,21 @@
-var socket = io("/chat");
-
-var messages = document.getElementById('messages');
-var form = document.getElementById('form');
-var input = document.getElementById('input');
-
-form.addEventListener('submit', function (e) {
-    e.preventDefault();
-    if (input.value) {
-      data = {msg: input.value};
-      socket.emit('chat message', data);
-      input.value = '';
-    }
+var socket = io("/chat", {
+  reconnection: true,
+  reconnectionDelay: 1000,
+  reconnectionAttempts: 5,
+  forceNew: false
 });
+// var messages = document.getElementById('messages');
+// var form = document.getElementById('form');
+// var input = document.getElementById('input');
 
-socket.on('chat message', function (msg) {
-    var item = document.createElement('li');
-    item.textContent = msg;
-    messages.appendChild(item);
-    window.scrollTo(0, document.body.scrollHeight);
-});
+socket.on("New User", (data) => {
+  console.log(data);
+})
+
+socket.on("Message", (msg) => {
+  console.log(msg);
+})
+
+function CreateMessage(msg) {
+  socket.emit("New message", {'msg': msg});
+}

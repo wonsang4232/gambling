@@ -39,7 +39,7 @@ app.use(require('./routes/chat'));
 
 // socket
 const ChatSocket = require('./controller/chatController');
-ChatSocket.ChatSocket(server);
+ChatSocket.ChatRoomSocket(server);
 
 app.use('/socket.io/socket.io.js', express.static('node_modules/socket.io/client-dist/socket.io.js')); // Why not default?
 

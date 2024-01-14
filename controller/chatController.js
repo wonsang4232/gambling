@@ -5,7 +5,7 @@ exports.renderChatpage = (req, res) => {
     res.render('chat');
   } else {
     req.flash('error', 'You need to login first to chat with others.');
-    res.redirect('login');
+    res.redirect('/login');
   }
 }
 
@@ -14,11 +14,11 @@ exports.Chatroom = (req, res) => {
     res.render('chatroom');
   } else {
     req.flash('error', 'You need to login first to chat with others.');
-    res.redirect('login');
+    res.redirect('/login');
   }
 }
 
-exports.ChatSocket = (server) => {
+exports.ChatRoomSocket = (server) => {
   const io = socketio(server);
   const chatsocket = io.of('/chat');
 
@@ -35,7 +35,7 @@ exports.ChatSocket = (server) => {
   chatsocket.on('connection', (socket) => {
     console.log("User Connected : ", socket.id);
 
-    socket.on("CreateRoom", (data) => {
+    socket.on("Create Room", (data) => {
       const hostName = data.hostname;
       let roomcode = generateRoomCode();
 
@@ -48,7 +48,7 @@ exports.ChatSocket = (server) => {
 
       socket.join(roomcode);
 
-      socket.emit('roomCreated',
+      socket.emit('Room Created',
         {roomcode, 
         socketID: socket.id,
         playerNames: rooms[roomcode].playerName
@@ -59,11 +59,11 @@ exports.ChatSocket = (server) => {
 
     }) 
 
-    socket.on("JoinRoom", (data) => {
+    socket.on("Join Room", (data) => {
       var roomcode = data.roomcode;
 
       if (rooms[roomcode]) {
-        console.log("joined");
+        // console.log("joined");
         rooms[roomcode].numOfPlayer += 1;
         rooms[roomcode].playerName.push(data.playername);
         rooms[roomcode].players.push(socket.id);
@@ -71,19 +71,28 @@ exports.ChatSocket = (server) => {
         socket.join(roomcode);
 
         console.log(rooms[roomcode]);
-
-        chatsocket.to(roomcode).emit('Room Joined', {
+        
+        chatsocket.in(roomcode).emit('Room Joined', {
           roomcode,
           socketID: socket.id,
           playerNames: rooms[roomcode].playerName
         })
       } else {
-        chatsocket.to(socket.id).emit('Error', {error: "Room not found!!"});
+        chatsocket.to(socket.id).emit('Error', {error: "Roomcode not found!!"});
       }
     })
-
+    socket.on("Joining", (data) => {
+      console.log(data);
+      chatsocket.in(data.roomcode).emit("Joining", data);
+    })
     socket.on('disconnect', async () => {
         console.log('user disconnected');
     });
   });
 };
+
+// exports.ChatSocket = (server) => {
+//   const io = socketio(server);
+//   const chatsocket = io.of('/chat');
+  
+// }
